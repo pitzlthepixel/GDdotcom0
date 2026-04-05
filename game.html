@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Geometry Dash - Play Level 1</title>
+    <title>Geometry Dash</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         * { margin: 0; padding: 0; }
         body { overflow: hidden; }
         canvas { display: block; margin: 0 auto; }
     </style>
   <script>
-async function start() {
-  const reg = await navigator.serviceWorker.register('/geometrydashdotcom/test.js');
-  await navigator.serviceWorker.ready;
-  if (!navigator.serviceWorker.controller) {
-    await new Promise(resolve => {
-      navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true });
-    });
-  }
+    async function start() {
+      const levelId = Number(new URLSearchParams(location.search).get('id')) || 1;
 
-  navigator.serviceWorker.controller.postMessage({ levelId: 2 });
+      await navigator.serviceWorker.register('/geometrydashdotcom/test.js');
+      await navigator.serviceWorker.ready;
 
-  const script = document.createElement('script');
-  script.type = 'module';
-  script.src = './assets/index-game.js';
-  document.body.appendChild(script);
-}
+      navigator.serviceWorker.controller?.postMessage({ levelId });
 
-start();
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = './assets/index-game.js';
+      document.body.appendChild(script);
+    }
+
+    start();
   </script>
   <script>
     // ResizeObserver catches iframe size changes that window.resize misses
