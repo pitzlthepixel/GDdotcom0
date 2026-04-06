@@ -38,7 +38,7 @@ self.addEventListener("fetch", (event) => {
 
     if (url.pathname.includes("StereoMadness.mp3")) {
       event.respondWith(
-        fetch(`/geometrydashdotcom/assets/music/-1.mp3`)
+        fetch(`https://getlevelsong.lasokar.workers.dev?id=${levelID}`)
       );
       return;
     }
