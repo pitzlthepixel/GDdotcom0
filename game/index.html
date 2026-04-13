@@ -52,14 +52,13 @@
         const index = Math.abs(levelId) - 1;
         if (officialLevels[index]) {
             window.levelName = officialLevels[index];
-            console.log(window.levelName);
         } else {
             window.levelName = "Unknown";
         }
       }
     }
     start();
-    updateLevelName();
+    setTimeout(updateLevelName, 2000);
   </script>
   <script>
     let fix = false;
